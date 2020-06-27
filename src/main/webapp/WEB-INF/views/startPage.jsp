@@ -12,6 +12,5 @@ Authorization was successfull <p>
     LocalTime now = LocalTime.now();
     out.println(String.format("Current server time: %tR", now));
 %>
-
 </body>
 </html>
