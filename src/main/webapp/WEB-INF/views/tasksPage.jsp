@@ -6,9 +6,11 @@
 <head>
     <title>Title</title>
 </head>
-<body bgcolor=#daa520>
-Authorization was successfull <p>
+<body>
+<p></p>
 <%
+    String nickname = (String) session.getAttribute("user_nickname");
+    out.println("Mur-Mur, busy " + nickname + "!\n");
     LocalTime now = LocalTime.now();
     out.println(String.format("Current server time: %tR", now));
 %>

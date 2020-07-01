@@ -1,22 +1,53 @@
 package com.taskmanager.busycat.model;
 
+import javax.enterprise.inject.Model;
+
+@Model
 public class User {
-    String email;
-    String password;
+   private int user_id;
+   private String user_nickname;
+   private String user_email;
+   private String user_password;
 
-    public String getEmail() {
-        return email;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUser_nickname() {
+        return user_nickname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setUser_nickname(String user_nickname) {
+        this.user_nickname = user_nickname;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
+
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", user_nickname='" + user_nickname + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", user_password='" + user_password + '\'' +
+                '}';
     }
 }

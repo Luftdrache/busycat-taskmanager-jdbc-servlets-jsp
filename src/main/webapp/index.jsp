@@ -1,14 +1,16 @@
+<%@ page import="com.taskmanager.busycat.dao.DBCreation" %>
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Busy Cat</title>
-        <link href="resources/css/startpage.css" rel="stylesheet">
+    <link href="resources/css/startpage.css" rel="stylesheet">
 </head>
 
 <body>
+
 <p></p><h2>Plan your life with Busy Cat!</h2>
-<div><img src="https://i.pinimg.com/236x/60/ff/6e/60ff6eba10f194b302158d129fc7fe6c--icon-icon-a-website.jpg" alt="Cat"
+<div><img src="resources/images/catpic.jpg" alt="Cat"
           weight="145" height="150"></div>
 
 
@@ -19,10 +21,9 @@
 </form>
 
 
-<form action="registrationServlet" method="get">
+<form action="registration" method="get">
     <p><input type="submit" value="Sign up" class="submitButton"></p>
 </form>
-
 
 <h2 style="color:tomato;">${warning}</h2>
 

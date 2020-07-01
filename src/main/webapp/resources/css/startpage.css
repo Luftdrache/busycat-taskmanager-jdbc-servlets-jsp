@@ -1,4 +1,4 @@
-.textField, .passField {
+.textField, .passField, .emailField {
     width: 25%; /* Ширина поля */
     padding: 10px; /* Поля */
     box-sizing: border-box; /* Алгоритм расчёта ширины */
@@ -7,16 +7,23 @@
     border-radius: 5px;
     color: #FF6D37; /* Цвет текста */
     font-weight: bold;
-    background: url('../images/user.png') no-repeat left; /* Картинка пользователя */
-    background-size: contain;
     padding-height: 100 px ;
     padding-left: 50px; /* Расстояние от левого края */
+}
+.textField {
+    background: url('../images/user.png') no-repeat left; /* Картинка пользователя */
+    background-size: contain;
 }
 .passField {
     /* Картинка для поля с паролем */
     background: url('../images/lock.png') no-repeat left;
     background-size: contain;
 }
+.emailField {
+    background: url('../images/email.png') no-repeat left;
+    background-size: contain;
+}
+
 .submitButton {
     width: 25%; /* Ширина поля */
     padding: 10px; /* Поля */
@@ -24,6 +31,7 @@
     border-radius: 5px;
     background: #FF8C00;
 }
+
 body {
     margin-top: 20px;
     text-align:center;
