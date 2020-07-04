@@ -1,6 +1,7 @@
 package com.taskmanager.busycat.dao;
 
-import com.taskmanager.busycat.model.User;
+import com.taskmanager.busycat.util.DBConnectionPooling;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +21,11 @@ public class UserDAOImpl implements UserDAO{
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2,password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                user_id = resultSet.getInt(1);
+            try(ResultSet resultSet = preparedStatement.executeQuery();) {
+                while (resultSet.next()) {
+                    user_id = resultSet.getInt(1);
+                }
             }
-
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -60,9 +61,11 @@ public class UserDAOImpl implements UserDAO{
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, user_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                nickname  = resultSet.getString("user_nickname");
+            try( ResultSet resultSet = preparedStatement.executeQuery();) {
+
+                while (resultSet.next()) {
+                    nickname = resultSet.getString("user_nickname");
+                }
             }
 
         } catch (SQLException exception) {
@@ -70,7 +73,4 @@ public class UserDAOImpl implements UserDAO{
         }
         return nickname;
     }
-
-
-
 }

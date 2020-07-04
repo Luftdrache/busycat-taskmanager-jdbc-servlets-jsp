@@ -1,8 +1,6 @@
 package com.taskmanager.busycat.model;
 
-import javax.enterprise.inject.Model;
 
-@Model
 public class User {
    private int user_id;
    private String user_nickname;

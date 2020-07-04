@@ -1,4 +1,4 @@
-package com.taskmanager.busycat.dao;
+package com.taskmanager.busycat.util;
 
 
 import org.apache.commons.dbcp.BasicDataSource;

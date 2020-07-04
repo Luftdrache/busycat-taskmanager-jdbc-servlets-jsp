@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Sign Up</title>
-    <link href="resources/css/startpage.css" rel="stylesheet">
+    <link href="resources/css/stylePage.css" rel="stylesheet">
 </head>
 <body>
 <p></p><h2>Start with Busy Cat!</h2>
@@ -22,6 +22,8 @@
     <p><input type="password" maxlength="30" name="password"  placeholder="Password" class="passField"></p>
     <p><input type="submit" value="Get started" class="submitButton"></p>
 </form>
+
+Have an account already? <a href="<%=request.getContextPath() + "/index.jsp"%>">Sign in</a>
 
 <h3 style="color:tomato;">${warning}</h3>
 

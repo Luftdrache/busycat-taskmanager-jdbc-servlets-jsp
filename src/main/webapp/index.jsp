@@ -1,10 +1,10 @@
-<%@ page import="com.taskmanager.busycat.dao.DBCreation" %>
+<%@ page import="com.taskmanager.busycat.util.DBCreation" %>
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Busy Cat</title>
-    <link href="resources/css/startpage.css" rel="stylesheet">
+    <link href="resources/css/stylePage.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
     <p><input type="submit" value="Sign up" class="submitButton"></p>
 </form>
 
-<h2 style="color:tomato;">${warning}</h2>
+<h3 style="color:tomato;">${warning}</h3>
 
 </body>
 </html>

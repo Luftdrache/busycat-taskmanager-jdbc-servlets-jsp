@@ -1,6 +1,5 @@
 package com.taskmanager.busycat.controller;
 
-import com.taskmanager.busycat.dao.DBCreation;
 import com.taskmanager.busycat.dao.UserDAO;
 import com.taskmanager.busycat.dao.UserDAOImpl;
 import com.taskmanager.busycat.util.EmailValidation;
@@ -39,13 +38,8 @@ public class AuthorizationServlet extends HttpServlet {
         session.setAttribute("user_id", user_id);
         session.setAttribute("user_nickname", userDAO.getNickname(user_id));
 
-
-        req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").include(req, resp);
+        resp.sendRedirect("tasks");
     }
 
 
-    @Override
-    public void init() throws ServletException {
-        DBCreation.createTables();
-    }
 }
