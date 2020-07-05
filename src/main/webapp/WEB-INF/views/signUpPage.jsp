@@ -10,6 +10,7 @@
 <head>
     <title>Sign Up</title>
     <link href="resources/css/stylePage.css" rel="stylesheet">
+    <link rel="shortcut icon" href="resources/images/user.png" type="image/png">
 </head>
 <body>
 <p></p><h2>Start with Busy Cat!</h2>

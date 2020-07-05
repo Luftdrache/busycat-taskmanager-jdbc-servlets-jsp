@@ -33,7 +33,6 @@ public class AuthorizationServlet extends HttpServlet {
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
 
-
         HttpSession session = req.getSession();
         session.setAttribute("user_id", user_id);
         session.setAttribute("user_nickname", userDAO.getNickname(user_id));

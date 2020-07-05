@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Error page</title>
+    <link rel="shortcut icon" href="resources/images/user.png" type="image/png">
 </head>
 <body>
 Error notification should be here (with err code and cat pic).

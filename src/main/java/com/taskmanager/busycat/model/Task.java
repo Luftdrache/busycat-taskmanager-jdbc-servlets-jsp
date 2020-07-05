@@ -7,10 +7,24 @@ public class Task {
     private int task_id;
     private String task_title;
     private String task_description;
-    private Date task_termination_date;
     private TaskStatus task_status;
     private int goal_id;
     private int user_id;
+
+    public Task(String task_title, String task_description, int user_id) {
+        this.task_title = task_title;
+        this.task_description = task_description;
+        this.task_status = TaskStatus.IN_PROGRESS;
+        this.user_id = user_id;
+    }
+    public Task(int task_id, String task_title, String task_description, TaskStatus task_status, int goal_id, int user_id) {
+        this.task_id = task_id;
+        this.task_title = task_title;
+        this.task_description = task_description;
+        this.task_status = task_status;
+        this.goal_id = goal_id;
+        this.user_id = user_id;
+    }
 
     public int getTask_id() {
         return task_id;
@@ -56,13 +70,19 @@ public class Task {
         return task_status;
     }
 
-    public void setTask_termination_date(Date task_termination_date) {
-        this.task_termination_date = task_termination_date;
-    }
-
     public void setTask_status(TaskStatus task_status) {
         this.task_status = task_status;
     }
 
-
+    @Override
+    public String toString() {
+        return "Task{" +
+                "task_id=" + task_id +
+                ", task_title='" + task_title + '\'' +
+                ", task_description='" + task_description + '\'' +
+                ", task_status=" + task_status +
+                ", goal_id=" + goal_id +
+                ", user_id=" + user_id +
+                '}';
+    }
 }

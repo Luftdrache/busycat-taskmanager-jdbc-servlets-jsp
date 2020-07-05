@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Busy Cat</title>
     <link href="resources/css/stylePage.css" rel="stylesheet">
+    <link rel="shortcut icon" href="resources/images/user.png" type="image/png">
 </head>
 
 <body>

@@ -1,5 +1,10 @@
 package com.taskmanager.busycat.controller;
 
+import com.mysql.cj.Session;
+import com.taskmanager.busycat.dao.TaskDAO;
+import com.taskmanager.busycat.dao.TaskDAOImpl;
+import com.taskmanager.busycat.model.Task;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,52 +13,93 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-@WebServlet("/tasks/*")
+@WebServlet("/tasks")
 public class MainLogicControllerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String action = req.getPathInfo();
+        String action = req.getParameter("action");
+        System.out.println(action);
+        System.out.println("In post: "+ req.getRequestURI());
 
-//        try {
         switch (action) {
-            case "/new_task":
-                System.out.println("333333333333333");
-//                    addTask(request, response);
+            case "new_task":
+                addTask(req, resp);
                 break;
-            case "/new_goal":
+            case "new_goal":
 //                    addGoal(request, response);
                 break;
-            case "/insert":
+            case "insert":
                 //  insertNewTask(request, response);
                 break;
-            case "/delete":
-                //    deleteTask(request, response);
+            case "delete":
+                delete(req, resp);
                 break;
-            case "/edit":
+            case "edit":
                 //    showEditForm(request, response);
                 break;
-            case "/update":
+            case "update":
                 //      updateBook(request, response);
                 break;
+            case "change_status":
+                changeStatus(req, resp);
+                break;
             default:
-                //    listBook(request, response);
+                    showTasks(req, resp);
                 break;
         }
-//        } catch (SQLException ex) {
-//            throw new ServletException(ex);
-//        }
         doGet(req, resp);
     }
 
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        if( req.getSession(false) == null) {
-//            req.getRequestDispatcher("index.jsp").forward(req, resp);
-//        }
+        if( req.getSession(false) == null) {
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }
+        showTasks(req, resp);
         req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
+    }
 
+    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+        int task_id = Integer.parseInt(req.getParameter("id"));
+        TaskDAO taskDAO = new TaskDAOImpl();
+        taskDAO.deleteTask(task_id);
+    }
+
+
+    private void changeStatus(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        int task_id = Integer.parseInt(req.getParameter("task_id"));
+        String status = req.getParameter("status");
+        TaskDAO taskDAO = new TaskDAOImpl();
+        taskDAO.changeTaskStatus(task_id, status);
+    }
+
+
+    private void showTasks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        int user_id = (Integer) session.getAttribute("user_id");
+
+        TaskDAO taskDAO = new TaskDAOImpl();
+        List<Task> listOfTasks = taskDAO.showAllTasks(user_id);
+        req.setAttribute("listOfTasks", listOfTasks);
+        req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
+    }
+
+    private void addTask(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+
+        String title = req.getParameter("title");
+        String description = req.getParameter("description");
+        int user_id = (Integer) session.getAttribute("user_id");
+
+        Task task = new Task(title, description, user_id);
+        System.out.println(task);
+        TaskDAO taskDAO = new TaskDAOImpl();
+        taskDAO.createTask(task);
     }
 }
