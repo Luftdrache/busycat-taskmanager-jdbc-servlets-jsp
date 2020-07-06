@@ -1,13 +1,32 @@
 package com.taskmanager.busycat.model;
 
 
+import com.taskmanager.busycat.util.TaskStatus;
+
+import java.util.List;
+
 public class Goal {
    private int goal_id;
    private String goal_title;
    private String goal_description;
-   private int subgoal_id;
-   private int task_id;
+   private TaskStatus goal_status;
    private int user_id;
+   private List<Goal> subgoalsList;
+   private List<Task> taskList;
+
+    public Goal(String goal_title, String goal_description, int user_id) {
+        this.goal_title = goal_title;
+        this.goal_description = goal_description;
+        this.goal_status = TaskStatus.IN_PROGRESS;
+        this.user_id = user_id;
+    }
+
+    public Goal(int goal_id, String goal_title, String goal_description, int user_id) {
+        this.goal_id = goal_id;
+        this.goal_title = goal_title;
+        this.goal_description = goal_description;
+        this.user_id = user_id;
+    }
 
     public int getGoal_id() {
         return goal_id;
@@ -21,16 +40,12 @@ public class Goal {
         return goal_description;
     }
 
-    public int getSubgoal_id() {
-        return subgoal_id;
-    }
-
-    public int getTask_id() {
-        return task_id;
-    }
-
     public int getUser_id() {
         return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public void setGoal_id(int goal_id) {
@@ -45,16 +60,29 @@ public class Goal {
         this.goal_description = goal_description;
     }
 
-    public void setSubgoal_id(int subgoal_id) {
-        this.subgoal_id = subgoal_id;
+
+    public TaskStatus getGoal_status() {
+        return goal_status;
     }
 
-    public void setTask_id(int task_id) {
-        this.task_id = task_id;
+    public void setGoal_status(TaskStatus goal_status) {
+        this.goal_status = goal_status;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public List<Goal> getSubgoalsList() {
+        return subgoalsList;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setSubgoalsList(List<Goal> subgoalsList) {
+        this.subgoalsList = subgoalsList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     @Override
@@ -63,9 +91,10 @@ public class Goal {
                 "goal_id=" + goal_id +
                 ", goal_title='" + goal_title + '\'' +
                 ", goal_description='" + goal_description + '\'' +
-                ", subgoal_id=" + subgoal_id +
-                ", task_id=" + task_id +
+                ", goal_status=" + goal_status +
                 ", user_id=" + user_id +
+                ", subgoalsList=" + subgoalsList +
+                ", taskList=" + taskList +
                 '}';
     }
 }

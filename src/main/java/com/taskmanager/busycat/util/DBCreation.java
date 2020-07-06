@@ -24,6 +24,7 @@ public class DBCreation {
                     "goal_id int (11) NOT NULL AUTO_INCREMENT,\n" +
                     "goal_title varchar (50) NOT NULL,\n" +
                     "goal_description varchar (150),\n" +
+                    "goal_status int (1),\n" +
                     "subgoal_id int (11),\n" +
                     "task_id int (11),\n" +
                     "user_id int (11) NOT NULL,\n" +

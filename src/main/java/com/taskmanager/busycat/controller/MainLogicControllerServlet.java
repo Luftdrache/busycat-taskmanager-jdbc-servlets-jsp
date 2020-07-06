@@ -1,8 +1,10 @@
 package com.taskmanager.busycat.controller;
 
-import com.mysql.cj.Session;
+import com.taskmanager.busycat.dao.GoalDAO;
+import com.taskmanager.busycat.dao.GoalDAOImpl;
 import com.taskmanager.busycat.dao.TaskDAO;
 import com.taskmanager.busycat.dao.TaskDAOImpl;
+import com.taskmanager.busycat.model.Goal;
 import com.taskmanager.busycat.model.Task;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/tasks")
@@ -30,13 +31,13 @@ public class MainLogicControllerServlet extends HttpServlet {
                 addTask(req, resp);
                 break;
             case "new_goal":
-//                    addGoal(request, response);
+                addGoal(req, resp);
                 break;
             case "insert":
                 //  insertNewTask(request, response);
                 break;
             case "delete":
-                delete(req, resp);
+                deleteTask(req, resp);
                 break;
             case "edit":
                 //    showEditForm(request, response);
@@ -48,7 +49,7 @@ public class MainLogicControllerServlet extends HttpServlet {
                 changeStatus(req, resp);
                 break;
             default:
-                    showTasks(req, resp);
+                showAll(req, resp);
                 break;
         }
         doGet(req, resp);
@@ -61,11 +62,48 @@ public class MainLogicControllerServlet extends HttpServlet {
         if( req.getSession(false) == null) {
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
-        showTasks(req, resp);
+//        showTasks(req, resp);
+        showAll(req, resp);
         req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
     }
 
-    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+    private void showAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        int user_id = (Integer) session.getAttribute("user_id");
+
+        TaskDAO taskDAO = new TaskDAOImpl();
+        List<Task> listOfTasks = taskDAO.showAllTasks(user_id);
+        req.setAttribute("listOfTasks", listOfTasks);
+
+        GoalDAO goalDAO = new GoalDAOImpl();
+        List<Goal> listOfGoals = goalDAO.showAllGoals(user_id);
+        req.setAttribute("listOfGoals", listOfGoals );
+        req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
+    }
+
+    private void addGoal(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+
+        String title = req.getParameter("goal_title");
+        String description = req.getParameter("goal_description");
+        int user_id = (Integer) session.getAttribute("user_id");
+        Goal goal = new Goal(title, description, user_id);
+        GoalDAO goalDAO = new GoalDAOImpl();
+        System.out.println(goal);
+        goalDAO.createGoal(goal);
+    }
+
+    private void addTask(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        String title = req.getParameter("title");
+        String description = req.getParameter("description");
+        int user_id = (Integer) session.getAttribute("user_id");
+        Task task = new Task(title, description, user_id);
+        TaskDAO taskDAO = new TaskDAOImpl();
+        taskDAO.createTask(task);
+    }
+
+    private void deleteTask(HttpServletRequest req, HttpServletResponse resp) {
         int task_id = Integer.parseInt(req.getParameter("id"));
         TaskDAO taskDAO = new TaskDAOImpl();
         taskDAO.deleteTask(task_id);
@@ -80,26 +118,22 @@ public class MainLogicControllerServlet extends HttpServlet {
     }
 
 
-    private void showTasks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        int user_id = (Integer) session.getAttribute("user_id");
-
-        TaskDAO taskDAO = new TaskDAOImpl();
-        List<Task> listOfTasks = taskDAO.showAllTasks(user_id);
-        req.setAttribute("listOfTasks", listOfTasks);
-        req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
-    }
-
-    private void addTask(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session = req.getSession();
-
-        String title = req.getParameter("title");
-        String description = req.getParameter("description");
-        int user_id = (Integer) session.getAttribute("user_id");
-
-        Task task = new Task(title, description, user_id);
-        System.out.println(task);
-        TaskDAO taskDAO = new TaskDAOImpl();
-        taskDAO.createTask(task);
-    }
+//    private void showTasks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession();
+//        int user_id = (Integer) session.getAttribute("user_id");
+//
+//        TaskDAO taskDAO = new TaskDAOImpl();
+//        List<Task> listOfTasks = taskDAO.showAllTasks(user_id);
+//        req.setAttribute("listOfTasks", listOfTasks);
+//        req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
+//    }
+//
+//    private void showGoals(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession();
+//        int user_id = (Integer) session.getAttribute("user_id");
+//        GoalDAO goalDAO = new GoalDAOImpl();
+//        List<Goal> listOfGoals = goalDAO.showAllGoals(user_id);
+//        req.setAttribute("listOfGoals", listOfGoals );
+//        req.getRequestDispatcher("/WEB-INF/views/tasksPage.jsp").forward(req, resp);
+//    }
 }
