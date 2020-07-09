@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface GoalDAO {
     void createGoal(Goal goal);
-    List<Goal> showAllGoals(int user_id);
+    List<Goal> showAllGoalsAndTasks(int user_id);
+    void changeGoalStatus(int goal_id, String status);
 }

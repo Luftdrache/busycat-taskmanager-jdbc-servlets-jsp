@@ -3,6 +3,7 @@ package com.taskmanager.busycat.model;
 
 import com.taskmanager.busycat.util.TaskStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Goal {
@@ -14,6 +15,10 @@ public class Goal {
    private List<Goal> subgoalsList;
    private List<Task> taskList;
 
+    public Goal(List<Task> tasks){
+        this.taskList = tasks;
+    }
+
     public Goal(String goal_title, String goal_description, int user_id) {
         this.goal_title = goal_title;
         this.goal_description = goal_description;
@@ -21,10 +26,11 @@ public class Goal {
         this.user_id = user_id;
     }
 
-    public Goal(int goal_id, String goal_title, String goal_description, int user_id) {
+    public Goal(int goal_id, String goal_title, String goal_description, TaskStatus goal_status, int user_id) {
         this.goal_id = goal_id;
         this.goal_title = goal_title;
         this.goal_description = goal_description;
+        this.goal_status = goal_status;
         this.user_id = user_id;
     }
 

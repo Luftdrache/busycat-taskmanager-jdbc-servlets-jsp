@@ -38,7 +38,6 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
 
-
     @Override
     public void createTask(Task task) {
         String sql = "INSERT INTO taskmanager.task VALUES (null, ?, ?, ?, ?, ?);";

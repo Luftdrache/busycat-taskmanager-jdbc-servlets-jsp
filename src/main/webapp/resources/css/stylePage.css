@@ -24,8 +24,8 @@
 }
 
 .submitButton {
-    width: 25%; /* Ширина поля */
-    padding: 10px; /* Поля */
+    width: 25%;
+    padding: 10px;
     font-weight: bold;
     border-radius: 5px;
     background: #FF8C00;
@@ -43,6 +43,11 @@
     background-size: contain;
 }
 
+.editButton{
+    background:  url("../images/edit.png") no-repeat left;
+    background-size: contain;
+}
+
 .layout DIV {position: absolute;}
 
 .leftPart {
@@ -51,11 +56,11 @@
 }
 
 .middlePart {
-     height:100%; width: 50%; left:20%; top: 0; padding: 20px;
+     height:100%; width: 75%; left:20%; top: 0;
 }
 
 .rightPart{
-    height:100%; width: 30%; left:70%; top: 0; linear-gradient(180deg,  darkorange, white);
+    height:100%; width: 30%; left:80%; top: 0; linear-gradient(180deg,  darkorange, white);
 }
 .catPic {
     top:25%; left: 50px;
@@ -92,6 +97,7 @@ body {
 section {position:absolute;bottom: 5%; width: 100%}
 
 table{
+    padding-left: 20px;
     font-family: serif;
     width: 100%;
     border-bottom: none;
@@ -103,6 +109,23 @@ tbody tr:hover {
 }
 
 td {
-    width: 25%;
+    /*width: 25%;*/
     border-bottom: 2px solid darkorange;
+    padding: 0 10px;
+}
+
+.dropdown{
+    display: inline-block;
+}
+
+.listButton {
+    background: #FF8C00;
+    border: 1px solid #CCC;
+}
+
+.drop-content{
+display: block;
+    font-size: 15px;
+    background: #f3bd48;
+    text-decoration: none;
 }
